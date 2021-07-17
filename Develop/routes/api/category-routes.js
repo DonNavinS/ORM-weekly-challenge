@@ -1,11 +1,9 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
-const seedCategories = require("../../seeds/category-seeds")
 
 // The `/api/categories` endpoint
 
 router.get('/', (req, res) => {
-  // seedCategories();
 
   Category.findAll()
 
@@ -22,7 +20,6 @@ router.get('/', (req, res) => {
 )});
 
 router.get('/:id', (req, res) => {
-// seedCategories();
 
   Category.findOne({
     where: {
@@ -48,8 +45,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
 Category.create({
-  
-  category_name: req.body.name
+  category_name: req.body.category_name
 })
 
 .then((userData) => {
@@ -63,11 +59,44 @@ Category.create({
 });
 
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+Category.update(req.body, {
+  where: {
+    id: req.params.id
+  },
+})
+
+.then(userData => {
+  if (!userData[0]) {
+    res.status(404).json({message: "There is no user with this ID"})
+    return;
+  }
+  res.json(`Updated category number ${req.params.id}`)
+})
+
+.catch(err => {
+  if (err) {
+    res.json(500).json(err)
+  }
+})
 });
 
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
+Category.destroy({
+  where: {
+    id: req.params.id
+  }
+})
+
+.then(userData => {
+
+  res.json(`Category with ID ${req.params.id} has been deleted`)
+
+})
+
+.catch(err => {
+  res.json(err)
+})
+
 });
 
 module.exports = router;
