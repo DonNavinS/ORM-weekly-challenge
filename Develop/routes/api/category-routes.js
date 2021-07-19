@@ -5,7 +5,9 @@ const { Category, Product } = require('../../models');
 
 router.get('/', (req, res) => {
 
-  Category.findAll()
+  Category.findAll({
+    include: 'product'
+  })
 
   .then((data) => {
     res.json(data)
@@ -24,7 +26,8 @@ router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
       id: req.params.id
-    }
+    },
+include: 'product'
   })
 
   .then((data) => {

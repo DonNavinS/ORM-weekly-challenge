@@ -5,7 +5,11 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', (req, res) => {
-  Product.findAll()
+  Product.findAll({
+    include: 'category',
+    // include: 'tag'
+     
+  })
 
   .then((data) => {
     res.json(data)
@@ -17,7 +21,6 @@ router.get('/', (req, res) => {
     }
   })
   
-  // be sure to include its associated Category and Tag data
 });
 
 // get one product
@@ -25,7 +28,8 @@ router.get('/:id', (req, res) => {
   Product.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    include: 'category'
   })
 
   .then((data) => {
@@ -40,7 +44,6 @@ router.get('/:id', (req, res) => {
       res.status(500).json(err)
     }
   })
-  // be sure to include its associated Category and Tag data
 });
 
 // create new product
@@ -126,6 +129,10 @@ router.delete('/:id', (req, res) => {
 
   .then(data => {
     res.json({message: `Product with ID ${req.params.id} has been deleted`})
+  })
+
+  .catch(err => {
+    res.json(err)
   })
 });
 

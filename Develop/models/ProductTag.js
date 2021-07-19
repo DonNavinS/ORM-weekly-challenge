@@ -16,9 +16,13 @@ ProductTag.init(
     },
     product_id: {
       type: DataTypes.INTEGER,
-    },
+      // references: 'product'
+
+  },
     tag_id: {
       type: DataTypes.INTEGER,
+      // references: 'tag'
+  
     }
   },
   {
