@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
 
   Category.findAll()
 
-  .then((userData) => {
-    res.json(userData)
+  .then((data) => {
+    res.json(data)
   })
 
   .catch((err) => {
@@ -27,12 +27,12 @@ router.get('/:id', (req, res) => {
     }
   })
 
-  .then((userData) => {
-    if (!userData) {
+  .then((data) => {
+    if (!data) {
       res.status(404).json({message: "No category with this ID"})
       return;
     }
-    res.json(userData)
+    res.json(data)
 
   })
   .catch((err)=> {
@@ -48,8 +48,8 @@ Category.create({
   category_name: req.body.category_name
 })
 
-.then((userData) => {
-  res.json(userData)
+.then((data) => {
+  res.json(data)
 })
 
 .catch(err => {
@@ -65,8 +65,8 @@ Category.update(req.body, {
   },
 })
 
-.then(userData => {
-  if (!userData[0]) {
+.then(data => {
+  if (!data[0]) {
     res.status(404).json({message: "There is no user with this ID"})
     return;
   }
@@ -87,9 +87,9 @@ Category.destroy({
   }
 })
 
-.then(userData => {
+.then(data => {
 
-  res.json(`Category with ID ${req.params.id} has been deleted`)
+  res.json({message:`Category with ID ${req.params.id} has been deleted`})
 
 })
 

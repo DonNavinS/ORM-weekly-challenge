@@ -4,17 +4,44 @@ const { Tag, Product, ProductTag } = require('../../models');
 // The `/api/tags` endpoint
 
 router.get('/', (req, res) => {
-  // find all tags
+  Tag.findAll()
+
+  .then(data => {
+    res.json(data)
+  })
+
+  .catch(err => {
+    if(err) {
+      res.status(500).json(err)
+    }
+  })
   // be sure to include its associated Product data
 });
 
 router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
+ Tag.findOne({
+   where: {
+     id: req.params.id
+   }
+ })
+
+ .then(data => {
+   if(!data) {
+     res.status(404).json({message: "No product found with that tag ID"})
+   }
+   res.json(data)
+ })
+
+ .catch(err => {
+   if(err) {
+     res.json(err)
+   }
+ })
   // be sure to include its associated Product data
 });
 
 router.post('/', (req, res) => {
-  // create a new tag
+  Tag.create()
 });
 
 router.put('/:id', (req, res) => {
