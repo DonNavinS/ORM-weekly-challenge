@@ -4,7 +4,7 @@ Videos: ***There are two videos because I forgot to include some of the content 
 https://drive.google.com/file/d/1iuc_TJzu3axcHS5ihua8GFsgQDTU72CK/view
 https://drive.google.com/file/d/15zOwtFrKaVtyck9b0Cdt14r3FNL26Vcs/view
 
-This assignement required us to refactor code for an e-commerce website's backend to allow for data to be stored in tables in a mySQL database. This required the 
+This assignment required us to refactor code for an e-commerce website's backend to allow for data to be stored in tables in a mySQL database. This required the 
 sequelize package to interact with mySQL, and the express package to create API routes to perform CRUD operations on the tables.
 It also involved using some of the key's from one tables, such as the ID from 'Categories' as foreign keys in other tables.
 
